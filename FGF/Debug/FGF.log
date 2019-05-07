@@ -1,0 +1,5 @@
+﻿  main.cpp
+c:\users\99762\desktop\fgf\fgf\main.cpp(9): warning C4326: “main”的返回类型应为“int”而非“void”
+c:\users\99762\desktop\fgf\fgf\rules.h(81): warning C4715: “Judge::Compare”: 不是所有的控件路径都返回值
+c:\users\99762\desktop\fgf\fgf\cards.h(55): warning C4715: “Card::getValue”: 不是所有的控件路径都返回值
+  FGF.vcxproj -> C:\Users\99762\Desktop\FGF\Debug\FGF.exe
