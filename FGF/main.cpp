@@ -112,15 +112,15 @@ void Playing(Card * players, bool game, int n, int * grade, int * now_g)
 					else if (select == 2) {
 						if (is_look[n] == 1)
 						{
-							*now_g += 5;
-							*grade -= 5;
+							*now_g += 10;
+							*grade -= 10;
 							cout << "目前底分：" << *now_g << endl;
 							cout << "你的积分：" << *grade << endl;
 						}
 						else if (is_look[n] == 0)
 						{
-							*now_g += 10;
-							*grade -= 10;
+							*now_g += 5;
+							*grade -= 5;
 							cout << "目前底分：" << *now_g << endl;
 							cout << "你的积分：" << *grade << endl;
 						}
@@ -164,12 +164,12 @@ void Playing(Card * players, bool game, int n, int * grade, int * now_g)
 					if (i == 2) {
 						cout << "他选择了看牌，然后跟注" << endl;
 						is_look[i] = 1;
-						*now_g += 5;
+						*now_g += 10;
 						cout << "目前底分：" << *now_g << endl;
 					}
 					else {
 						cout << "他选择了直接跟注" << endl;
-						*now_g += 10;
+						*now_g += 5;
 						cout << "目前底分：" << *now_g << endl;
 					}
 				}
