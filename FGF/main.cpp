@@ -9,7 +9,7 @@ void main()
 {
 	int now_g, grade = 500;
 	void PrintRules();
-	void Playing(Card * players, bool game, int n, int * grade, int * now_g);
+	void Playing(Card **players, bool game, int n, int * grade, int * now_g);
 	int Identity();
 	printf("**********************************************************************\n");
 	printf("***  *        *   *                 *             *     *          ***\n");
@@ -40,11 +40,11 @@ void main()
 			cards.sort(cards.player2);
 			cards.sort(cards.player3);
 			cards.sort(cards.player4);
-			Card * players[4] = { cards.player1, cards.player2, cards.player3, cards.player4 };
+			Card * players[4] = { cards.player1,cards.player2,cards.player3,cards.player4};
 			now_g = 5 * 4;
 			cout << "发牌结束，目前分数：" << now_g << endl;
 			cout << "游戏阶段：目前分数：" << now_g << endl;
-			Playing(*players, game, n, &grade, &now_g);
+			Playing(players, game, n, &grade, &now_g);
 		}
 		else if (select == 2) {
 			PrintRules();
@@ -79,10 +79,10 @@ int Identity()
 	return i;
 }
 
-void Playing(Card * players, bool game, int n, int * grade, int * now_g)
+void Playing(Card **players, bool game, int n, int * grade, int * now_g)
 {
 	int i, l = 0;
-	void Over(Card * players, int q, int n, int * grade, int * now_g);
+	void Over(Card **players, int q, int n, int * grade, int * now_g);
 	void Open(Card * player);
 	int select, is_quit[4] = { 0 }, is_look[4] = { 0 };
 	while (game)
@@ -106,7 +106,7 @@ void Playing(Card * players, bool game, int n, int * grade, int * now_g)
 					}
 					cin >> select;
 					if (select == 1) {
-						Open(&players[n]);
+						Open(players[n]);
 						is_look[n] = 1;
 					}
 					else if (select == 2) {
@@ -189,7 +189,7 @@ void Open(Card * player)
 	printf(" ▔▔        ▔▔         ▔▔\n");
 };
 
-void Over(Card * players, int q, int n, int * grade, int * now_g)
+void Over(Card **players, int q, int n, int * grade, int * now_g)
 {
 	int k;
 	if (q == 0) {
@@ -197,17 +197,17 @@ void Over(Card * players, int q, int n, int * grade, int * now_g)
 		{
 			if (k == n) {
 				cout << "你的牌:" << endl;
-				Open(&players[k]);
+				Open(players[k]);
 			}
 			else {
 				cout << "玩家" << k + 1 << "的牌：" << endl;
-				Open(&players[k]);
+				Open(players[k]);
 			}
 		}
-		Judge p_0(&players[0], 1);
-		Judge p_1(&players[1], 2);
-		Judge p_2(&players[2], 3);
-		Judge p_3(&players[3], 4);
+		Judge p_0(players[0], 1);
+		Judge p_1(players[1], 2);
+		Judge p_2(players[2], 3);
+		Judge p_3(players[3], 4);
 		if (p_0.Compare(&p_1) == 1) {
 			if (p_0.Compare(&p_2) == 1)
 			{
@@ -312,8 +312,8 @@ void Over(Card * players, int q, int n, int * grade, int * now_g)
 		{
 			if (k != n) {
 				cout << "玩家" << k + 1 << "的牌：" << endl;
-				Open(&players[k]);
-				Judge p(&players[k], k + 1);
+				Open(players[k]);
+				Judge p(players[k], k + 1);
 				ps[s] = &p;
 				s++;
 			}
