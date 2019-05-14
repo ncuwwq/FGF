@@ -24,13 +24,13 @@ void main()
 	bool game = true;
 	while (game)
 	{
-		int select;
+		char select;
 		SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_INTENSITY);
 		cout << "1.游戏开始(底分：5)   2.游戏规则    3.游戏结束" << endl;
 		cout << "你的积分：" << grade << endl;
 		cout << "请输入你的选项:" << endl;
 		cin >> select;
-		if (select == 1) {
+		if (select == '1') {
 			int n = Identity();
 			cout << "这局你是" << n + 1 << "号玩家，积分：" << grade << endl;
 			cout << "发牌阶段：" << endl;
@@ -46,10 +46,10 @@ void main()
 			cout << "游戏阶段：目前分数：" << now_g << endl;
 			Playing(players, game, n, &grade, &now_g);
 		}
-		else if (select == 2) {
+		else if (select == '2') {
 			PrintRules();
 		}
-		else if (select == 3) {
+		else if (select == '3') {
 			game = false;
 		}
 		else {
@@ -61,8 +61,8 @@ void main()
 void PrintRules()
 {
 	printf("1、豹子（AAA最大，222最小）\n \
-			2、同花顺（AKQ最大，A23最小）\n \
-			3、同花（AKJ最大，352最小）\n \
+			2、同花顺（AKQ最大，234最小）\n \
+			3、同花（AKJ最大，235最小）\n \
 			4、顺子（AKQ最大，234最小）\n \
 			5、对子（AAK最大，223最小）\n \
 			6、单张（AKJ最大，352最小）\n \
@@ -84,7 +84,8 @@ void Playing(Card **players, bool game, int n, int * grade, int * now_g)
 	int i, l = 0;
 	void Over(Card **players, int q, int n, int * grade, int * now_g);
 	void Open(Card * player);
-	int select, is_quit[4] = { 0 }, is_look[4] = { 0 };
+	char select;
+	int  is_quit[4] = { 0 }, is_look[4] = { 0 };
 	while (game)
 	{
 		l++;
@@ -105,11 +106,11 @@ void Playing(Card **players, bool game, int n, int * grade, int * now_g)
 						cout << "你的积分：" << *grade << endl;
 					}
 					cin >> select;
-					if (select == 1) {
+					if (select == '1') {
 						Open(players[n]);
 						is_look[n] = 1;
 					}
-					else if (select == 2) {
+					else if (select == '2') {
 						if (is_look[n] == 1)
 						{
 							*now_g += 10;
@@ -126,13 +127,13 @@ void Playing(Card **players, bool game, int n, int * grade, int * now_g)
 						}
 						start = false;
 					}
-					else if (select == 3) {
+					else if (select == '3') {
 						is_quit[n] = 1;
 						start = false;
 						Over(players, is_quit[n], n, grade, now_g);
 						game = false;
 					}
-					else if (select == 4 && l > 1) {
+					else if (select == '4' && l > 1) {
 						*now_g += 10;
 						*grade -= 10;
 						Over(players, is_quit[n], n, grade, now_g);
@@ -335,4 +336,29 @@ void Over(Card **players, int q, int n, int * grade, int * now_g)
 			cout << "恭喜玩家" << ps[2]->identity << "胜" << endl;
 		}
 	}
+}
+
+
+void Cards::sort(Card * cards)
+{
+	Card temp;
+	if (cards[0].value < cards[1].value)
+	{
+		temp = cards[0];
+		cards[0] = cards[1];
+		cards[1] = temp;
+	}
+	if (cards[0].value < cards[2].value)
+	{
+		temp = cards[0];
+		cards[0] = cards[2];
+		cards[2] = temp;
+	}
+	if (cards[1].value < cards[2].value)
+	{
+		temp = cards[1];
+		cards[1] = cards[2];
+		cards[2] = temp;
+	}
+
 }

@@ -23,7 +23,9 @@
     <ClInclude Include="Rules.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Cards.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Rules.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

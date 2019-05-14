@@ -1,9 +1,8 @@
 #pragma once
 #pragma once
+#include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include <iostream>
-
 using namespace std;
 
 class  Card
@@ -11,7 +10,7 @@ class  Card
 public:
 	int value;
 	char color;
-	string getValue();
+	string getValue();//牌值
 	void setCard(int v, char c)
 	{
 		value = v;
@@ -19,107 +18,13 @@ public:
 	}
 };
 
-string Card::getValue()
-{
-	switch (value)
-	{
-	case 1:
-		return "2";
-	case 2:
-		return "3";
-	case 3:
-		return "4";
-	case 4:
-		return "5";
-	case 5:
-		return "6";
-	case 6:
-		return "7";
-	case 7:
-		return "8";
-	case 8:
-		return "9";
-	case 9:
-		return "10";
-	case 10:
-		return "J";
-	case 11:
-		return "Q";
-	case 12:
-		return "K";
-	case 13:
-		return "A";
-	default:
-		break;
-	}
-}
 
 class Cards
 {
 public:
-	Cards();
-	void Deal();
-	void sort(Card * cards);
+	Cards();//初始化52张扑克牌
+	void Deal();//洗牌，发牌
+	void sort(Card * cards);//整理牌
 	Card cards[52], player1[3], player2[3], player3[3], player4[3];
 };
 
-Cards::Cards()
-{
-	int n = 0, i, j, k;
-	char color[4] = { '\004','\003','\005','\006' };//004:方块; 003:红心; 005:梅花; 006:黑桃;
-	Card newCards[52];
-	for (i = 0; i <= 3; i++)
-	{
-		for (j = 1; j <= 13; j++)
-		{
-			newCards[n].setCard(j, color[i]);
-			n++;
-		}
-	}
-
-	for (k = 0; k < 52; k++)
-	{
-		cards[k] = newCards[k];
-	}
-}
-
-void Cards::Deal()
-{
-	int i, j = 0;
-	srand((int)time(0));
-	for (i = 0; i < 52; i++)
-	{
-		swap(cards[i], cards[rand() % 52]);
-	}
-	for (i = 0; i < 3; i++)
-	{
-		player1[i] = cards[j++];
-		player2[i] = cards[j++];
-		player3[i] = cards[j++];
-		player4[i] = cards[j++];
-	}
-}
-
-void Cards::sort(Card * cards)
-{
-	Card temp;
-	if (cards[0].value < cards[1].value)
-	{
-		temp = cards[0];
-		cards[0] = cards[1];
-		cards[1] = temp;
-	}
-	if (cards[0].value < cards[2].value)
-	{
-		temp = cards[0];
-		cards[0] = cards[2];
-		cards[2] = temp;
-	}
-	if (cards[1].value < cards[2].value)
-	{
-		temp = cards[1];
-		cards[1] = cards[2];
-		cards[2] = temp;
-	}
-
-}
