@@ -339,26 +339,3 @@ void Over(Card **players, int q, int n, int * grade, int * now_g)
 }
 
 
-void Cards::sort(Card * cards)
-{
-	Card temp;
-	if (cards[0].value < cards[1].value)
-	{
-		temp = cards[0];
-		cards[0] = cards[1];
-		cards[1] = temp;
-	}
-	if (cards[0].value < cards[2].value)
-	{
-		temp = cards[0];
-		cards[0] = cards[2];
-		cards[2] = temp;
-	}
-	if (cards[1].value < cards[2].value)
-	{
-		temp = cards[1];
-		cards[1] = cards[2];
-		cards[2] = temp;
-	}
-
-}
